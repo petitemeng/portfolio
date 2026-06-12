@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meng Yu — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral:   #FF6B6B;
+      --violet:  #7C3AED;
+      --cyan:    #06B6D4;
+      --lime:    #84CC16;
+      --ink:     #0F0F14;
+      --surface: #17171F;
+      --muted:   #8888AA;
+      --light:   #F0F0FF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ink);
+      color: var(--light);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(15,15,20,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      background: linear-gradient(90deg, var(--coral), var(--violet));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 2.5rem 4rem;
+      max-width: 1100px; margin: 0 auto;
+      gap: 4rem;
+    }
+    .hero-text { flex: 1; }
+    .hero-eyebrow {
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800; line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .hero-name .stroke {
+      -webkit-text-stroke: 2px var(--coral);
+      color: transparent;
+    }
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 700; color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title span {
+      background: linear-gradient(90deg, var(--violet), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-bio {
+      color: var(--muted); max-width: 520px;
+      margin-bottom: 2.5rem; font-size: 1.05rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 0.75rem 1.8rem;
+      border-radius: 100px; font-weight: 500; font-size: 0.95rem;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer; border: none; font-family: inherit;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--coral), var(--violet));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 30px rgba(124,58,237,0.6); }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.2);
+      color: var(--light); background: transparent;
+    }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* photo */
+    .hero-photo {
+      flex-shrink: 0; width: 300px; height: 300px;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      overflow: hidden; position: relative;
+      background: linear-gradient(135deg, var(--violet), var(--coral));
+      animation: morph 8s ease-in-out infinite;
+    }
+    @keyframes morph {
+      0%,100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      50%      { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+    }
+    .hero-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-photo .photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif; font-size: 5rem; font-weight: 800;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--coral);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; margin-bottom: 3rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px; padding: 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: var(--violet); transform: translateY(-4px); }
+    .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .skill-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.1rem; margin-bottom: 0.8rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      font-size: 0.78rem; padding: 0.25rem 0.75rem;
+      border-radius: 100px; background: rgba(255,255,255,0.07);
+      color: var(--muted);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 2rem;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
+    .project-accent {
+      width: 48px; height: 4px; border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.2rem; margin-bottom: 0.75rem;
+    }
+    .project-desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex: 1; }
+    .project-metric {
+      font-size: 0.85rem; color: var(--cyan);
+      font-weight: 500; margin-bottom: 1.2rem;
+    }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+    .project-links { display: flex; gap: 0.75rem; margin-top: auto; }
+    .project-link {
+      font-size: 0.85rem; font-weight: 500;
+      color: var(--cyan); text-decoration: none;
+      display: flex; align-items: center; gap: 0.3rem;
+    }
+    .project-link:hover { color: var(--light); }
+
+    /* ── CERTS ── */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; padding: 1.4rem 1.6rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: border-color 0.2s;
+    }
+    .cert-card:hover { border-color: var(--lime); }
+    .cert-badge {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .cert-name { font-size: 0.9rem; font-weight: 500; }
+    .cert-issuer { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+    /* ── CONTACT ── */
+    .contact-wrapper {
+      background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.1));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px; padding: 4rem;
+      text-align: center;
+    }
+    .contact-wrapper .section-title { margin-bottom: 1rem; }
+    .contact-sub { color: var(--muted); margin-bottom: 2.5rem; font-size: 1.05rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.4rem; border-radius: 100px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--light); text-decoration: none; font-size: 0.9rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.12); border-color: var(--cyan); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      max-width: 1100px; margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .hero { flex-direction: column-reverse; gap: 2rem; padding-top: 6rem; }
+      .hero-photo { width: 200px; height: 200px; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 3rem 1.5rem; }
+      .contact-wrapper { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Meng Yu</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="about">
+    <div class="hero-text">
+      <h1 class="hero-name">Meng<br><span class="stroke">Yu</span></h1>
+      <p class="hero-title">Aspiring Software Engineer & <span>Data Analyst</span></p>
+      <p class="hero-bio">
+        HCI Master's graduate turning data into decisions and ideas into interfaces.
+        AWS certified, Python-fluent, and endlessly curious about building things that actually help people.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">See my work</a>
+        <a href="cv.pdf" class="btn btn-outline" download>Download CV</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <!-- Replace the div below with: <img src="photo.jpg" alt="Meng Yu"> -->
+      <img src="IMG_2193.jpg" alt="Meng Yu">
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">What I've built</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-accent" style="background: linear-gradient(90deg, #FF6B6B, #7C3AED);"></div>
+        <h3 class="project-title">JobFlow</h3>
+        <p class="project-desc">Full-stack job application tracker with a React/TypeScript frontend, Node.js REST API, and PostgreSQL database. Deployed to cloud with CI/CD.</p>
+        <p class="project-metric">↗ Live · Full-stack · Cloud deployed</p>
+        <div class="project-stack">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Render</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/petitemeng/jobflow" target="_blank" class="project-link">↗ GitHub</a>
+          <!-- <a href="https://jobflow.onrender.com" target="_blank" class="project-link">↗ Live demo</a> -->
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-accent" style="background: linear-gradient(90deg, #06B6D4, #84CC16);"></div>
+        <h3 class="project-title">Customer Shopping Behavior Analysis</h3>
+        <p class="project-desc">End-to-end data pipeline cleaning 3,900+ transaction records, engineering features in PostgreSQL, and visualizing insights in an interactive Power BI dashboard.</p>
+        <p class="project-metric">↗ High-value customer segments identified</p>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">SQL</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/petitemeng/customer-behavior-analysis" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-accent" style="background: linear-gradient(90deg, #7C3AED, #06B6D4);"></div>
+        <h3 class="project-title">Interveu App Redesign</h3>
+        <p class="project-desc">UX research and full prototype redesign for Endurae's interview platform. Usability testing, accessibility improvements, and Figma prototypes.</p>
+        <p class="project-metric">↗ 25% improvement in user retention</p>
+        <div class="project-stack">
+          <span class="tag">UX Research</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Usability Testing</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">What I work with</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Data & Analytics</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">SQL</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Tableau</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <div class="skill-name">Frontend & UX</div>
+        <div class="skill-tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">Figma</span>
+          <span class="tag">UX Research</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-name">Cloud & Backend</div>
+        <div class="skill-tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Azure</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">AI & ML</div>
+        <div class="skill-tags">
+          <span class="tag">scikit-learn</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">AI Ethics</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CERTIFICATIONS -->
+  <section>
+    <p class="section-label">Credentials</p>
+    <h2 class="section-title">Certifications</h2>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(255,153,0,0.15);"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/amazonaws.svg" style="width:22px; filter: invert(0.6) sepia(1) saturate(5) hue-rotate(-10deg);"></div>
+        <div>
+          <div class="cert-name">AWS Solutions Architect – Associate</div>
+          <div class="cert-issuer">Amazon Web Services · SAA-C03</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(255,153,0,0.15);"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/amazonaws.svg" style="width:22px; filter: invert(0.6) sepia(1) saturate(5) hue-rotate(-10deg);"></div>
+        <div>
+          <div class="cert-name">AWS Cloud Practitioner</div>
+          <div class="cert-issuer">Amazon Web Services · CLF-C02</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(66,133,244,0.15);"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/google.svg" style="width:20px;"></div>
+        <div>
+          <div class="cert-name">Google Data Analytics</div>
+          <div class="cert-issuer">Google</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(0,120,215,0.15);"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoft.svg" style="width:20px;"></div>
+        <div>
+          <div class="cert-name">Microsoft Python Development</div>
+          <div class="cert-issuer">Microsoft</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-badge" style="background: rgba(0,237,100,0.15);"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mongodb.svg" style="width:22px;"></div>
+        <div>
+          <div class="cert-name">MongoDB for SQL Experts</div>
+          <div class="cert-issuer">MongoDB University</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-wrapper">
+      <p class="section-label">Get in touch</p>
+      <h2 class="section-title">Let's work together</h2>
+      <p class="contact-sub">Open to junior data analyst, BI, and frontend roles in Dublin.<br>Always happy to chat about data, tech, or career pivots.</p>
+      <div class="contact-links">
+        <a href="mailto:comeng.yu@gmail.com" class="contact-link">✉️ comeng.yu@gmail.com</a>
+        <a href="https://www.linkedin.com/in/meng-y-23a410291" target="_blank" class="contact-link">💼 LinkedIn</a>
+        <a href="https://github.com/petitemeng" target="_blank" class="contact-link">🐙 GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by Meng Yu · Dublin, Ireland · 2026</p>
+  </footer>
+
+</body>
+</html>
